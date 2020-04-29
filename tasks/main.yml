@@ -1,0 +1,17 @@
+---
+- block:
+    - name: ensure ppa for redis tools is exist
+      apt_repository:
+        repo: "ppa:chris-lea/redis-server"
+        state: present
+    - name: ensure redis tools is installed
+      apt:
+        name: redis-tools
+        cache_valid_time: "{{ apt_cache_valid_time|default(omit) }}"
+        install_recommends: no
+        state: latest
+        update_cache: yes
+  become: yes
+  become_method: sudo
+  tags:
+    - redis-cli
