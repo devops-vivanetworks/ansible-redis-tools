@@ -4,12 +4,12 @@ driver:
   cachier: true
 
 platforms:
-  - name: ubuntu-14.04
-    driver:
-      box: ubuntu/trusty64
   - name: ubuntu-16.04
     driver:
       box: ubuntu/xenial64
+  - name: ubuntu-18.04
+    driver:
+      box: ubuntu/bionic64
 
 provisioner:
   name: ansible_playbook
@@ -18,7 +18,6 @@ provisioner:
   require_chef_omnibus: false
   require_chef_for_busser: false
   playbook: tests/test.yml
-  requirements_path: tests/requirements.yml
 
 verifier:
   name: inspec
