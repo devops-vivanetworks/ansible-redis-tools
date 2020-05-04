@@ -1,0 +1,29 @@
+---
+driver:
+  name: vagrant
+  cachier: true
+
+platforms:
+  - name: ubuntu-16.04
+    driver:
+      box: ubuntu/xenial64
+  - name: ubuntu-18.04
+    driver:
+      box: ubuntu/bionic64
+
+provisioner:
+  name: ansible_playbook
+  hosts: all
+  ansible_verbose: true
+  require_chef_omnibus: false
+  require_chef_for_busser: false
+  playbook: tests/test.yml
+
+verifier:
+  name: inspec
+
+suites:
+  - name: default
+    verifier:
+      inspec_tests:
+        - tests/integration/default
